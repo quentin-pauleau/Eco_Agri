@@ -1,0 +1,49 @@
+﻿<Window x:Class="WPF_Agri.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Agri"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <ListBox x:Name="ListBox_Plantes"  HorizontalAlignment="Left" Height="414" Margin="10,0,0,0" VerticalAlignment="Center" Width="150" d:ItemsSource="{d:SampleData ItemCount=10}"/>
+        <ListBox x:Name="ListBox_Stades" HorizontalAlignment="Left" Height="414" Margin="180,0,0,0" VerticalAlignment="Center" Width="150" d:ItemsSource="{d:SampleData ItemCount=10}"/>
+
+        <Grid HorizontalAlignment="Left" Height="414" Margin="348,0,0,0" VerticalAlignment="Center" Width="442" d:Background="Aqua" RenderTransformOrigin="0.5,0.5">
+            <Label x:Name="Label_plante"/>
+            <Label x:Name="Label_State"/>
+
+            <Label x:Name="Label_j0"/>
+            <Label x:Name="Label_meteo_j0"/>
+            <Label x:Name="Label_kc_j0"/>
+
+            <Label x:Name="Label_j1"/>
+            <Label x:Name="Label_meteo_j1"/>
+            <Label x:Name="Label_kc_j1"/>
+
+            <Label x:Name="Label_j2"/>
+            <Label x:Name="Label_meteo_j2"/>
+            <Label x:Name="Label_kc_j2"/>
+
+            <Label x:Name="Label_j3"/>
+            <Label x:Name="Label_meteo_j3"/>
+            <Label x:Name="Label_kc_j3"/>
+
+            <Label x:Name="Label_j4"/>
+            <Label x:Name="Label_meteo_j4"/>
+            <Label x:Name="Label_kc_j4"/>
+
+            <Label x:Name="Label_j5"/>
+            <Label x:Name="Label_meteo_j5"/>
+            <Label x:Name="Label_kc_j5"/>
+
+            <Label x:Name="Label_j6"/>
+            <Label x:Name="Label_meteo_j6"/>
+            <Label x:Name="Label_kc_j6"/>
+
+
+        </Grid>
+
+    </Grid>
+</Window>
