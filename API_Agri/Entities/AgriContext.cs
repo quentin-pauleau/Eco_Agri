@@ -19,7 +19,12 @@ public partial class AgriContext : DbContext
 
     public virtual DbSet<Stade> Stades { get; set; }
 
-    public virtual DbSet<StadePlante> StadePlantes { get; set; }
+    public virtual DbSet<Terrain> Terrains { get; set; }
+
+    public virtual DbSet<Reserve> Reserves { get; set; }
+
+    public virtual DbSet<TerrainReserve> TerrainsReserves { get; set; }
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -53,31 +58,82 @@ public partial class AgriContext : DbContext
             entity.Property(e => e.StadeDescription)
                 .HasMaxLength(64)
                 .HasColumnName("stade_description");
+
+            entity.HasIndex(e => e.StadePlanteId, "stade_plante_id");
+
+            entity.Property(e => e.StadePlanteId).HasColumnName("stade_plante_id");
+            entity.Property(e => e.StadeKc).HasColumnName("stade_kc");
+
+            entity.HasOne(d => d.Plante).WithMany()
+                .HasForeignKey(d => d.StadePlanteId)
+                .HasConstraintName("plante_id");
         });
 
-        modelBuilder.Entity<StadePlante>(entity =>
+        modelBuilder.Entity<Terrain>(entity =>
+        {
+            entity.HasKey(e => e.TerrainId).HasName("PRIMARY");
+
+            entity
+                .HasNoKey()
+                .ToTable("terrain");
+
+            entity.HasIndex(e => e.TerrainPlanteId, "plante_id_idx");
+
+            entity.Property(e => e.TerrainId)
+                .HasColumnName("terrain_id");
+            entity.Property(e => e.TerrainInsee)
+                .HasMaxLength(5)
+                .HasColumnName("reserve_insee");
+            entity.Property(e => e.TerrainNom)
+                .HasMaxLength(45)
+                .HasColumnName("terrain_nom");
+            entity.Property(e => e.TerrainSurface)
+                .HasColumnName("terrain_surface");
+            entity.Property(e => e.TerrainPlanteId).HasColumnName("terrain_plante_id");
+
+            entity.HasOne(d => d.Plante).WithMany()
+                .HasForeignKey(d => d.TerrainPlanteId)
+                .HasConstraintName("plante_id");
+        });
+
+        modelBuilder.Entity<Reserve>(entity =>
+        {
+            entity.HasKey(e => e.ReserveId).HasName("PRIMARY");
+
+            entity
+                .HasNoKey()
+                .ToTable("reserve");
+
+            entity.Property(e => e.ReserveId)
+                .HasColumnName("reserve_id");
+            entity.Property(e => e.ReserveMax)
+                .HasColumnName("reserve_max");
+            entity.Property(e => e.ReserveActuel)
+                .HasColumnName("terrain_actuel");
+        });
+        
+        modelBuilder.Entity<TerrainReserve>(entity =>
         {
             entity
                 .HasNoKey()
-                .ToTable("stade_plante");
+                .ToTable("terrain_reserve");
 
-            entity.HasIndex(e => e.PlanteId, "plante_id_idx");
+            entity.HasIndex(e => e.TerrainId, "terrain_id_idx");
 
-            entity.HasIndex(e => e.StadeId, "stade_id_idx");
+            entity.HasIndex(e => e.ReserveId, "reserve_id_idx");
 
-            entity.Property(e => e.PlanteId).HasColumnName("plante_id");
-            entity.Property(e => e.StadeId).HasColumnName("stade_id");
-            entity.Property(e => e.StadePlanteKc)
-                .HasDefaultValueSql("'0'")
-                .HasColumnName("stade_plante_kc");
+            entity.Property(e => e.TerrainId)
+                .HasColumnName("terrain_id");
+            entity.Property(e => e.ReserveId)
+                .HasColumnName("reserve_id");
 
-            entity.HasOne(d => d.Plante).WithMany()
-                .HasForeignKey(d => d.PlanteId)
-                .HasConstraintName("plante_id");
+            entity.HasOne(d => d.Terrain).WithMany()
+                .HasForeignKey(d => d.TerrainId)
+                .HasConstraintName("terrain_id");
 
-            entity.HasOne(d => d.Stade).WithMany()
-                .HasForeignKey(d => d.StadeId)
-                .HasConstraintName("stade_id");
+            entity.HasOne(d => d.Reserve).WithMany()
+                .HasForeignKey(d => d.ReserveId)
+                .HasConstraintName("reserve_id");
         });
 
         OnModelCreatingPartial(modelBuilder);

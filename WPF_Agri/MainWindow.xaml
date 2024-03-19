@@ -7,43 +7,49 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <ListBox x:Name="ListBox_Plantes"  HorizontalAlignment="Left" Height="414" Margin="10,0,0,0" VerticalAlignment="Center" Width="150" d:ItemsSource="{d:SampleData ItemCount=10}"/>
-        <ListBox x:Name="ListBox_Stades" HorizontalAlignment="Left" Height="414" Margin="180,0,0,0" VerticalAlignment="Center" Width="150" d:ItemsSource="{d:SampleData ItemCount=10}"/>
+        <ListBox x:Name="ListBox_Plantes"  HorizontalAlignment="Left" Height="382" Margin="10,42,0,0" VerticalAlignment="Top" Width="150" d:ItemsSource="{d:SampleData ItemCount=10}" SelectionChanged="ListBox_Plantes_SelectionChanged"/>
+        <ListBox x:Name="ListBox_Stades" HorizontalAlignment="Left" Height="382" Margin="180,42,0,0" VerticalAlignment="Top" Width="150" d:ItemsSource="{d:SampleData ItemCount=10}" SelectionChanged="ListBox_Stades_SelectionChanged"/>
 
         <Grid HorizontalAlignment="Left" Height="414" Margin="348,0,0,0" VerticalAlignment="Center" Width="442" d:Background="Aqua" RenderTransformOrigin="0.5,0.5">
-            <Label x:Name="Label_plante"/>
-            <Label x:Name="Label_State"/>
+            <Label x:Name="Label_plante" d:Content="Plante" Margin="20,0,300,380" Width="120" Height="30"/>
+            <Label x:Name="Label_Stade" d:Content="Stade" Margin="21,32,300,352" Width="120" Height="30"/>
 
-            <Label x:Name="Label_j0"/>
+            <Label x:Name="Label_Reserve" d:Content="Reserve" Margin="21,62,300,322" Width="120" Height="30"/>
+
+            <Label x:Name="Label_j0" d:Content="j0"/>
             <Label x:Name="Label_meteo_j0"/>
             <Label x:Name="Label_kc_j0"/>
 
-            <Label x:Name="Label_j1"/>
+            <Label x:Name="Label_j1" d:Content="j1"/>
             <Label x:Name="Label_meteo_j1"/>
             <Label x:Name="Label_kc_j1"/>
 
-            <Label x:Name="Label_j2"/>
+            <Label x:Name="Label_j2" d:Content="j2"/>
             <Label x:Name="Label_meteo_j2"/>
             <Label x:Name="Label_kc_j2"/>
 
-            <Label x:Name="Label_j3"/>
+            <Label x:Name="Label_j3" d:Content="j3"/>
             <Label x:Name="Label_meteo_j3"/>
             <Label x:Name="Label_kc_j3"/>
 
-            <Label x:Name="Label_j4"/>
+            <Label x:Name="Label_j4" d:Content="j4"/>
             <Label x:Name="Label_meteo_j4"/>
             <Label x:Name="Label_kc_j4"/>
 
-            <Label x:Name="Label_j5"/>
+            <Label x:Name="Label_j5" d:Content="j5"/>
             <Label x:Name="Label_meteo_j5"/>
             <Label x:Name="Label_kc_j5"/>
 
-            <Label x:Name="Label_j6"/>
+            <Label x:Name="Label_j6" d:Content="j6"/>
             <Label x:Name="Label_meteo_j6"/>
             <Label x:Name="Label_kc_j6"/>
 
 
         </Grid>
+        <Button x:Name="Actualise_ListBox_Plante" Content="Button" HorizontalAlignment="Left" Height="32" Margin="128,10,0,0" VerticalAlignment="Top" Width="32"/>
+        <Button x:Name="Actualise_ListBox_Stade" Content="Button" HorizontalAlignment="Left" Height="32" Margin="298,10,0,0" VerticalAlignment="Top" Width="32" Click="Actualise_Stade_Click"/>
+        <Label x:Name="Label_ListBox_Plante" Content="Label" Margin="10,16,677,392"/>
+        <Label x:Name="Label_ListBox_Stade" Content="Label" Margin="180,16,507,392"/>
 
     </Grid>
 </Window>

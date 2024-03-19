@@ -1,6 +1,7 @@
 ﻿using API_Agri.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Net;
 
 namespace API_Agri.Controllers
@@ -32,6 +33,8 @@ namespace API_Agri.Controllers
                 {
                     StadeId = s.StadeId,
                     StadeDescription = s.StadeDescription,
+                    StadePlanteId = s.StadePlanteId,
+                    StadeKc = s.StadeKc
                 }
             ).ToListAsync();
 
@@ -53,6 +56,8 @@ namespace API_Agri.Controllers
                     {
                         StadeId = s.StadeId,
                         StadeDescription = s.StadeDescription,
+                        StadePlanteId = s.StadePlanteId,
+                        StadeKc = s.StadeKc
                     })
                 .FirstOrDefaultAsync(s => s.StadeId == Id);
 
@@ -66,6 +71,29 @@ namespace API_Agri.Controllers
             }
         }
 
+        [HttpGet("GetStadeByPlante")]
+        public async Task<ActionResult<List<Stade>>> GetStadeByPlante(int PlanteId)
+        {
+            var List = await AgriContext.Stades.Select(
+                s => new Stade
+                {
+                    StadeId = s.StadeId,
+                    StadeDescription = s.StadeDescription,
+                    StadePlanteId = s.StadePlanteId,
+                    StadeKc = s.StadeKc
+                }
+            ).Where(s => s.StadePlanteId == PlanteId).ToListAsync();
+
+            if (List.Count < 0)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return List;
+            }
+        }
+
         [HttpPost("InsertStade")]
         public async Task<HttpStatusCode> InsertStade(Stade Stade)
         {
@@ -73,6 +101,8 @@ namespace API_Agri.Controllers
             {
                 StadeId = Stade.StadeId,
                 StadeDescription = Stade.StadeDescription,
+                StadePlanteId = Stade.StadePlanteId,
+                StadeKc = Stade.StadeKc
             };
 
             AgriContext.Stades.Add(entity);
@@ -85,9 +115,10 @@ namespace API_Agri.Controllers
         public async Task<HttpStatusCode> UpdateStade(Stade Stade)
         {
             var entity = await AgriContext.Stades.FirstOrDefaultAsync(s => s.StadeId == Stade.StadeId);
-
             entity.StadeId = Stade.StadeId;
             entity.StadeDescription = Stade.StadeDescription;
+            entity.StadePlanteId = Stade.StadePlanteId;
+            entity.StadeKc = Stade.StadeKc;
 
             await AgriContext.SaveChangesAsync();
             return HttpStatusCode.OK;

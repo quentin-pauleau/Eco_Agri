@@ -1,10 +1,11 @@
+using API_Agri.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using MySql.EntityFrameworkCore.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddEntityFrameworkMySQL().AddDbContext<DbContext>(options => {
+builder.Services.AddEntityFrameworkMySQL().AddDbContext<AgriContext>(options => {
     options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
