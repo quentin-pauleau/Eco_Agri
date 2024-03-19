@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace WPF_Agri
+{
+    public partial class Reserve
+    {
+        public int ReserveId { get; set; }
+
+        public double? ReserveMax { get; set; }
+
+        public double? ReserveActuel { get; set; }
+    }
+}

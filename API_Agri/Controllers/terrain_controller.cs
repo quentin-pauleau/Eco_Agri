@@ -34,7 +34,8 @@ namespace API_Agri.Controllers
                     TerrainId = s.TerrainId,
                     TerrainInsee = s.TerrainInsee,
                     TerrainNom = s.TerrainNom,
-                    TerrainSurface = s.TerrainSurface
+                    TerrainSurface = s.TerrainSurface,
+                    TerrainPlanteId= s.TerrainPlanteId
                 }
             ).ToListAsync();
 
@@ -44,6 +45,19 @@ namespace API_Agri.Controllers
             }
             else
             {
+                foreach (var item in List)
+                    if (item.TerrainPlanteId != null)
+                    {
+                        item.Plante = await AgriContext.Plantes.Select(
+                                s => new Plante
+                                {
+                                    PlanteId = s.PlanteId,
+                                    PlanteType = s.PlanteType,
+                                    PlanteNom = s.PlanteNom,
+                                })
+                            .FirstOrDefaultAsync(s => s.PlanteId == item.TerrainPlanteId);
+                    }
+
                 return List;
             }
         }
@@ -57,7 +71,9 @@ namespace API_Agri.Controllers
                         TerrainId = s.TerrainId,
                         TerrainInsee = s.TerrainInsee,
                         TerrainNom = s.TerrainNom,
-                        TerrainSurface = s.TerrainSurface
+                        TerrainSurface = s.TerrainSurface,
+                        TerrainPlanteId = s.TerrainPlanteId
+
                     })
                 .FirstOrDefaultAsync(s => s.TerrainId == Id);
 
@@ -67,6 +83,18 @@ namespace API_Agri.Controllers
             }
             else
             {
+                if (Terrain.TerrainPlanteId != null)
+                {
+                    Terrain.Plante = await AgriContext.Plantes.Select(
+                            s => new Plante
+                            {
+                                PlanteId = s.PlanteId,
+                                PlanteType = s.PlanteType,
+                                PlanteNom = s.PlanteNom,
+                            })
+                        .FirstOrDefaultAsync(s => s.PlanteId == Terrain.TerrainPlanteId);
+                }
+
                 return Terrain;
             }
         }
@@ -75,12 +103,13 @@ namespace API_Agri.Controllers
         public async Task<ActionResult<Terrain>> GetTerrainByInsee(string Insee)
         {
             Terrain Terrain = await AgriContext.Terrains.Select(
-                    s => new Terrain
+                s => new Terrain
                     {
                         TerrainId = s.TerrainId,
                         TerrainInsee = s.TerrainInsee,
                         TerrainNom = s.TerrainNom,
-                        TerrainSurface = s.TerrainSurface
+                        TerrainSurface = s.TerrainSurface,
+                        TerrainPlanteId = s.TerrainPlanteId
                     })
                 .FirstOrDefaultAsync(s => s.TerrainInsee == Insee);
 
@@ -90,6 +119,18 @@ namespace API_Agri.Controllers
             }
             else
             {
+                if (Terrain.TerrainPlanteId != null)
+                {
+                    Terrain.Plante = await AgriContext.Plantes.Select(
+                        s => new Plante
+                        {
+                            PlanteId = s.PlanteId,
+                            PlanteType = s.PlanteType,
+                            PlanteNom = s.PlanteNom,
+                        })
+                        .FirstOrDefaultAsync(s => s.PlanteId == Terrain.TerrainPlanteId);
+                }
+
                 return Terrain;
             }
         }
@@ -99,13 +140,14 @@ namespace API_Agri.Controllers
         {
             var List = await AgriContext.Terrains.Select(
                 s => new Terrain
-                {
-                    TerrainId = s.TerrainId,
-                    TerrainInsee = s.TerrainInsee,
-                    TerrainNom = s.TerrainNom,
-                    TerrainSurface = s.TerrainSurface
-                }
-            ).Where(s => s.TerrainPlanteId == PlanteId).ToListAsync();
+                    {
+                        TerrainId = s.TerrainId,
+                        TerrainInsee = s.TerrainInsee,
+                        TerrainNom = s.TerrainNom,
+                        TerrainSurface = s.TerrainSurface,
+                        TerrainPlanteId = s.TerrainPlanteId
+                    }
+                ).Where(s => s.TerrainPlanteId == PlanteId).ToListAsync();
 
             if (List.Count < 0)
             {
@@ -113,6 +155,19 @@ namespace API_Agri.Controllers
             }
             else
             {
+                foreach (var item in List)
+                    if (item.TerrainPlanteId != null)
+                    {
+                        item.Plante = await AgriContext.Plantes.Select(
+                            s => new Plante
+                            {
+                                PlanteId = s.PlanteId,
+                                PlanteType = s.PlanteType,
+                                PlanteNom = s.PlanteNom,
+                            })
+                        .FirstOrDefaultAsync(s => s.PlanteId == item.TerrainPlanteId);
+                    }
+
                 return List;
             }
         }
@@ -125,7 +180,8 @@ namespace API_Agri.Controllers
                 TerrainId = Terrain.TerrainId,
                 TerrainInsee = Terrain.TerrainInsee,
                 TerrainNom = Terrain.TerrainNom,
-                TerrainSurface = Terrain.TerrainSurface
+                TerrainSurface = Terrain.TerrainSurface,
+                TerrainPlanteId = Terrain.TerrainPlanteId
             };
 
             AgriContext.Terrains.Add(entity);
@@ -142,6 +198,7 @@ namespace API_Agri.Controllers
             entity.TerrainInsee = Terrain.TerrainInsee;
             entity.TerrainNom = Terrain.TerrainNom;
             entity.TerrainSurface = Terrain.TerrainSurface;
+            entity.TerrainPlanteId = Terrain.TerrainPlanteId;
 
             await AgriContext.SaveChangesAsync();
             return HttpStatusCode.OK;

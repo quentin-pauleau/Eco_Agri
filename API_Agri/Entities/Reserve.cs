@@ -5,7 +5,7 @@ namespace API_Agri.Entities;
 
 public partial class Reserve
 {
-    public int? ReserveId { get; set; }
+    public int ReserveId { get; set; }
 
     public double? ReserveMax { get; set; }
 

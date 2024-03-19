@@ -58,6 +58,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Terrain.cs" />
+    <Compile Include="TerrainReserve.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,6 +70,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Plante.cs" />
+    <Compile Include="Reserve.cs" />
     <Compile Include="Stade.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

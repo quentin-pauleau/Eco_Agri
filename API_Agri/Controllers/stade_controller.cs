@@ -44,6 +44,19 @@ namespace API_Agri.Controllers
             }
             else
             {
+                foreach (var item in List)
+                    if (item.StadePlanteId != null)
+                    {
+                        item.Plante = await AgriContext.Plantes.Select(
+                                s => new Plante
+                                {
+                                    PlanteId = s.PlanteId,
+                                    PlanteType = s.PlanteType,
+                                    PlanteNom = s.PlanteNom,
+                                })
+                            .FirstOrDefaultAsync(s => s.PlanteId == item.StadePlanteId);
+                    }
+
                 return List;
             }
         }
@@ -67,6 +80,18 @@ namespace API_Agri.Controllers
             }
             else
             {
+                if (Stade.StadePlanteId != null)
+                {
+                    Stade.Plante = await AgriContext.Plantes.Select(
+                            s => new Plante
+                            {
+                                PlanteId = s.PlanteId,
+                                PlanteType = s.PlanteType,
+                                PlanteNom = s.PlanteNom,
+                            })
+                        .FirstOrDefaultAsync(s => s.PlanteId == Stade.StadePlanteId);
+                }
+
                 return Stade;
             }
         }
@@ -90,6 +115,19 @@ namespace API_Agri.Controllers
             }
             else
             {
+                foreach (var item in List)
+                    if (item.StadePlanteId != null)
+                    {
+                        item.Plante = await AgriContext.Plantes.Select(
+                                s => new Plante
+                                {
+                                    PlanteId = s.PlanteId,
+                                    PlanteType = s.PlanteType,
+                                    PlanteNom = s.PlanteNom,
+                                })
+                            .FirstOrDefaultAsync(s => s.PlanteId == item.StadePlanteId);
+                    }
+
                 return List;
             }
         }

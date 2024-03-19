@@ -73,9 +73,7 @@ public partial class AgriContext : DbContext
         {
             entity.HasKey(e => e.TerrainId).HasName("PRIMARY");
 
-            entity
-                .HasNoKey()
-                .ToTable("terrain");
+            entity.ToTable("terrain");
 
             entity.HasIndex(e => e.TerrainPlanteId, "plante_id_idx");
 
@@ -83,7 +81,7 @@ public partial class AgriContext : DbContext
                 .HasColumnName("terrain_id");
             entity.Property(e => e.TerrainInsee)
                 .HasMaxLength(5)
-                .HasColumnName("reserve_insee");
+                .HasColumnName("terrain_insee");
             entity.Property(e => e.TerrainNom)
                 .HasMaxLength(45)
                 .HasColumnName("terrain_nom");
@@ -100,9 +98,7 @@ public partial class AgriContext : DbContext
         {
             entity.HasKey(e => e.ReserveId).HasName("PRIMARY");
 
-            entity
-                .HasNoKey()
-                .ToTable("reserve");
+            entity.ToTable("reserve");
 
             entity.Property(e => e.ReserveId)
                 .HasColumnName("reserve_id");
