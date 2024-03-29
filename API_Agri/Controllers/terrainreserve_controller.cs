@@ -19,8 +19,6 @@ namespace API_Agri.Controllers
         /// <summary>
         /// Définition du Web Service
         /// </summary>
-        /// <remarks>Je manque d'imagination</remarks>
-        /// <param name="id">id du client a retourné</param>   
         /// <response code="200">client sélectionné</response>
         /// <response code="404">client introuvable pour l'id spécifié</response>
         /// <response code="500">Oops! le service est indisponible pour le moment</response>

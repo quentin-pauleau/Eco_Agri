@@ -65,7 +65,7 @@ namespace API_Agri.Controllers
         [HttpGet("GetTerrainById")]
         public async Task<ActionResult<Terrain>> GetTerrainById(int Id)
         {
-            Terrain Terrain = await AgriContext.Terrains.Select(
+            Terrain? Terrain = await AgriContext.Terrains.Select(
                     s => new Terrain
                     {
                         TerrainId = s.TerrainId,
@@ -102,7 +102,7 @@ namespace API_Agri.Controllers
         [HttpGet("GetTerrainByInsee")]
         public async Task<ActionResult<Terrain>> GetTerrainByInsee(string Insee)
         {
-            Terrain Terrain = await AgriContext.Terrains.Select(
+            Terrain? Terrain = await AgriContext.Terrains.Select(
                 s => new Terrain
                     {
                         TerrainId = s.TerrainId,
@@ -170,6 +170,78 @@ namespace API_Agri.Controllers
 
                 return List;
             }
+        }
+
+        [HttpGet("GetAutonomieByData")]
+        public async Task<ActionResult<double>> GetAutonomieByData(double kc, double surface, double volume)
+        {
+            return volume / (kc * surface);
+        }
+
+        [HttpGet("GetAutonomieByIds")]
+        public async Task<ActionResult<double?>> GetAutonomieByIds(int TerrainId, int StadeId)
+        {
+            Dictionary<string, Double?> Autonomie = new Dictionary<string, Double?>();
+            double? kc = null;
+            double? volume = null;
+            double? surface = null;
+
+            var terrain = await AgriContext.Terrains.Select(
+                s => new Terrain
+                {
+                    TerrainId = s.TerrainId,
+                    TerrainSurface = s.TerrainSurface,
+                    TerrainPlanteId = s.TerrainPlanteId
+                })
+                .FirstOrDefaultAsync(s => s.TerrainId == TerrainId);
+
+            if (terrain != null)
+            {
+                surface = terrain.TerrainSurface;
+
+                Stade? stade = await AgriContext.Stades.Select(
+                    s => new Stade
+                    {
+                        StadeKc = s.StadeKc
+                    })
+                    .FirstOrDefaultAsync(s => s.StadeKc == StadeId);
+
+                kc = stade != null ? stade.StadeKc : null;
+
+
+                List<TerrainReserve> terrainsReserves = await AgriContext.TerrainsReserves.Select(
+                    s => new TerrainReserve
+                    {
+                        TerrainId = s.TerrainId,
+                        ReserveId = s.ReserveId
+                    })
+                    .Where(s => s.TerrainId == terrain.TerrainId).ToListAsync();
+
+                List<Reserve> reserves = new List<Reserve>();
+                foreach (var terrainReserve in terrainsReserves)
+                {
+                    reserves.AddRange(await AgriContext.Reserves.Select(
+                        s => new Reserve
+                        {
+                            ReserveActuel = s.ReserveActuel
+                        })
+                        .Where(s => s.ReserveId == terrainReserve.ReserveId).ToListAsync());
+                    
+                }
+
+                if (reserves.Any())
+                {
+                    volume = 0;
+                    foreach (var reserve in reserves)
+                        volume += reserve.ReserveActuel;
+                }
+            }
+
+            if (kc != null && volume != null && surface != null)
+            {
+                return volume / (kc * surface);
+            }
+            return NotFound();
         }
 
         [HttpPost("InsertTerrain")]

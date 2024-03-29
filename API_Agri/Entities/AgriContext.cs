@@ -105,7 +105,7 @@ public partial class AgriContext : DbContext
             entity.Property(e => e.ReserveMax)
                 .HasColumnName("reserve_max");
             entity.Property(e => e.ReserveActuel)
-                .HasColumnName("terrain_actuel");
+                .HasColumnName("reserve_actuel");
         });
         
         modelBuilder.Entity<TerrainReserve>(entity =>

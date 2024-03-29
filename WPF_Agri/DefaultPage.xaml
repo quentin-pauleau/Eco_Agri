@@ -1,0 +1,72 @@
+﻿<Page x:Class="WPF_Agri.DefaultPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF_Agri"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DefaultPage">
+
+    <Grid>
+        <!--<ListBox x:Name="ListBox_Plantes"  HorizontalAlignment="Left" Height="382" Margin="10,42,0,0" VerticalAlignment="Top" Width="150" 
+        d:ItemsSource="{d:SampleData ItemCount=10}" SelectionChanged="ListBox_Plantes_SelectionChanged"/>-->
+
+        <ListBox x:Name="ListBox_Terrains"  HorizontalAlignment="Left" Height="340" Margin="10,47,0,0" 
+                 VerticalAlignment="Top" Width="150" 
+                 d:ItemsSource="{d:SampleData ItemCount=10}" SelectionChanged="ListBox_Terrains_SelectionChanged"/>
+        <ListBox x:Name="ListBox_Stades" HorizontalAlignment="Left" Height="377" Margin="180,47,0,0" 
+                 VerticalAlignment="Top" Width="150" 
+                 d:ItemsSource="{d:SampleData ItemCount=10}" SelectionChanged="ListBox_Stades_SelectionChanged"/>
+
+        <Grid HorizontalAlignment="Left" Height="414" Margin="433,0,0,0" VerticalAlignment="Center" Width="357" d:Background="Aqua" RenderTransformOrigin="0.5,0.5">
+
+            <!--<Label x:Name="Label_plante" d:Content="Plante" Margin="21,2,301,249" Width="120" Height="30"/>-->
+            <Label x:Name="Label_terrain" d:Content="Terrain" Margin="21,2,301,249" Width="120" Height="30"/>
+            <Label x:Name="Label_Stade" d:Content="Stade" Margin="22,32,300,219" Width="120" Height="30"/>
+
+            <!--<Label x:Name="Label_Reserve" d:Content="Reserve" Margin="22,62,300,189" Width="120" Height="30"/>-->
+            <ListBox x:Name="ListBox_Reserves"  HorizontalAlignment="Left" Height="86" Margin="10,42,0,0" 
+                 VerticalAlignment="Top" Width="150" 
+                 d:ItemsSource="{d:SampleData ItemCount=10}" SelectionChanged="ListBox_Reserves_SelectionChanged"/>
+
+            <Label x:Name="Label_j0" d:Content="j0" Grid.RowSpan="2"/>
+            <Label x:Name="Label_meteo_j0" Grid.RowSpan="2"/>
+            <Label x:Name="Label_kc_j0" Grid.RowSpan="2"/>
+
+            <Label x:Name="Label_j1" d:Content="j1" Grid.RowSpan="2"/>
+            <Label x:Name="Label_meteo_j1" Grid.RowSpan="2"/>
+            <Label x:Name="Label_kc_j1" Grid.RowSpan="2"/>
+
+            <Label x:Name="Label_j2" d:Content="j2" Grid.RowSpan="2"/>
+            <Label x:Name="Label_meteo_j2" Grid.RowSpan="2"/>
+            <Label x:Name="Label_kc_j2" Grid.RowSpan="2"/>
+
+            <Label x:Name="Label_j3" d:Content="j3" Grid.RowSpan="2"/>
+            <Label x:Name="Label_meteo_j3" Grid.RowSpan="2"/>
+            <Label x:Name="Label_kc_j3" Grid.RowSpan="2"/>
+
+            <Label x:Name="Label_j4" d:Content="j4" Margin="128,0,0,0"/>
+            <Label x:Name="Label_meteo_j4" Margin="128,0,0,0"/>
+            <Label x:Name="Label_kc_j4" Margin="128,0,0,0"/>
+
+            <Label x:Name="Label_j5" d:Content="j5" Margin="128,0,0,0"/>
+            <Label x:Name="Label_meteo_j5" Margin="128,0,0,0"/>
+            <Label x:Name="Label_kc_j5" Margin="128,0,0,0"/>
+
+            <Label x:Name="Label_j6" d:Content="j6" Margin="128,0,0,0"/>
+            <Label x:Name="Label_meteo_j6" Margin="128,0,0,0"/>
+            <Label x:Name="Label_kc_j6" Margin="128,0,0,0"/>
+
+
+        </Grid>
+        <Button x:Name="Actualise_ListBox_Plante" Content="Button" HorizontalAlignment="Left" Height="32" Margin="128,10,0,0" VerticalAlignment="Top" Width="32"/>
+        <Button x:Name="Actualise_ListBox_Stade" Content="Button" HorizontalAlignment="Left" Height="32" Margin="298,10,0,0" VerticalAlignment="Top" Width="32" Click="Actualise_Stade_Click"/>
+        <Label x:Name="Label_ListBox_Plante" Content="Label" Margin="10,16,677,392"/>
+        <Label x:Name="Label_ListBox_Stade" Content="Label" Margin="180,16,507,392"/>
+        <Button x:Name="newTerrain" Content="Nouveau Terrain" HorizontalAlignment="Left" Height="32" 
+                Margin="10,392,0,0" VerticalAlignment="Top" Width="150"
+                FontSize="15" FontWeight="SemiBold" Click="newTerrain_Click"/>
+
+    </Grid>
+</Page>

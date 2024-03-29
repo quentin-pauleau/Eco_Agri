@@ -59,5 +59,59 @@ namespace WPF_Agri
             }
             return plantes;
         }
+
+        static public async Task<List<Terrain>> GetListTerrains()
+        {
+            List<Terrain> terrains = null;
+            string link = "https://localhost:7273/api/Plante/GetTerrains";
+            HttpResponseMessage response = await client.GetAsync(link);
+            if (response.IsSuccessStatusCode)
+            {
+                var terrainStream = await response.Content.ReadAsStreamAsync();
+                var serialiser = new JsonSerializer();
+                terrains = serialiser.Deserialize<List<Terrain>>(new JsonTextReader(new StreamReader(terrainStream)));
+            }
+            return terrains;
+        }
+
+        static public async Task<List<Terrain>> GetListTerrainsByInsee(int insee)
+        {
+            //* get all terrain with the matching Insee
+            List<Terrain> terrains = null;
+            string link = $"https://localhost:7273/api/Terrain/GetTerrainByInsee?Insee={insee}";
+            HttpResponseMessage response = await client.GetAsync(link);
+            if (response.IsSuccessStatusCode)
+            {
+                var terrainStream = await response.Content.ReadAsStreamAsync();
+                var serialiser = new JsonSerializer();
+                terrains = serialiser.Deserialize<List<Terrain>>(new JsonTextReader(new StreamReader(terrainStream)));
+            }
+            return terrains;
+        }
+
+        static public async Task<List<Terrain>> GetListTerrainsByName(string name)
+        {
+            List<Terrain> terrains = null;
+            string link = $"https://localhost:7273/api/Terrain/GetTerrainByName?Name={name}";
+            HttpResponseMessage response = await client.GetAsync(link);
+            if (response.IsSuccessStatusCode)
+            {
+                var terrainStream = await response.Content.ReadAsStreamAsync();
+                var serialiser = new JsonSerializer();
+                terrains = serialiser.Deserialize<List<Terrain>>(new JsonTextReader(new StreamReader(terrainStream)));
+            }
+            return terrains;
+        }
+
+        static public async Task<bool> CreateTerrain(Terrain terrain)
+        {
+            string link = $"{terrain}";
+            HttpResponseMessage response = await client.GetAsync(link);
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
