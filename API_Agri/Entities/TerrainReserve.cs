@@ -5,6 +5,7 @@ namespace API_Agri.Entities;
 
 public partial class TerrainReserve
 {
+    public int TerrainReserveId { get; set; }
     public int? TerrainId { get; set; }
 
     public int? ReserveId { get; set; }

@@ -20,7 +20,6 @@ namespace API_Agri.Controllers
         /// Définition du Web Service
         /// </summary>
         /// <remarks>Je manque d'imagination</remarks>
-        /// <param name="id">id du client a retourné</param>   
         /// <response code="200">client sélectionné</response>
         /// <response code="404">client introuvable pour l'id spécifié</response>
         /// <response code="500">Oops! le service est indisponible pour le moment</response>
@@ -49,7 +48,7 @@ namespace API_Agri.Controllers
         [HttpGet("GetReserveById")]
         public async Task<ActionResult<Reserve>> GetReserveById(int Id)
         {
-            Reserve Reserve = await AgriContext.Reserves.Select(
+            Reserve? Reserve = await AgriContext.Reserves.Select(
                     s => new Reserve
                     {
                         ReserveId = s.ReserveId,
@@ -69,37 +68,43 @@ namespace API_Agri.Controllers
         }
 
         [HttpGet("GetReservesByTerrainId")]
-        public async Task<ActionResult<Reserve>> GetReservesByTerrainId(int Id)
+        public async Task<ActionResult<List<Reserve>>> GetReservesByTerrainId(int Id)
         {
-            TerrainReserve TerrainReserve = await AgriContext.TerrainsReserves.Select(
+            var TerrainsReserves = await AgriContext.TerrainsReserves.Select(
                     s => new TerrainReserve
                     {
                         ReserveId = s.ReserveId,
+                        TerrainId = s.TerrainId
                     })
-                .FirstOrDefaultAsync(s => s.TerrainId == Id);
+                .Where(s => s.TerrainId == Id).ToListAsync();
 
-            if (TerrainReserve == null)
+            if (TerrainsReserves.Count < 0)
             {
                 return NotFound();
             }
             else
             {
-                Reserve Reserve = await AgriContext.Reserves.Select(
-                        s => new Reserve
-                        {
-                            ReserveId = s.ReserveId,
-                            ReserveMax = s.ReserveMax,
-                            ReserveActuel = s.ReserveActuel,
-                        })
-                    .FirstOrDefaultAsync(s => s.ReserveId == TerrainReserve.ReserveId);
+                var Reserves = new List<Reserve>();
+                foreach (TerrainReserve TerrainReserve in TerrainsReserves)
+                {
+                    Reserves.Add(await AgriContext.Reserves.Select(
+                            s => new Reserve
+                            {
+                                ReserveId = s.ReserveId,
+                                ReserveMax = s.ReserveMax,
+                                ReserveActuel = s.ReserveActuel,
+                            })
+                        .FirstAsync(s => s.ReserveId == TerrainReserve.ReserveId));
+                }
 
-                if (Reserve == null)
+
+                if (Reserves.Count < 0)
                 {
                     return NotFound();
                 }
                 else
                 {
-                    return Reserve;
+                    return Reserves;
                 }
             }
         }
@@ -125,12 +130,17 @@ namespace API_Agri.Controllers
         {
             var entity = await AgriContext.Reserves.FirstOrDefaultAsync(s => s.ReserveId == Reserve.ReserveId);
 
-            entity.ReserveId = Reserve.ReserveId;
-            entity.ReserveMax = Reserve.ReserveMax;
-            entity.ReserveActuel = Reserve.ReserveActuel;
+            if (entity != null)
+            {
+                entity.ReserveId = Reserve.ReserveId;
+                entity.ReserveMax = Reserve.ReserveMax;
+                entity.ReserveActuel = Reserve.ReserveActuel;
 
-            await AgriContext.SaveChangesAsync();
-            return HttpStatusCode.OK;
+                await AgriContext.SaveChangesAsync();
+                return HttpStatusCode.OK;
+            }
+
+            return HttpStatusCode.BadRequest;
         }
 
         [HttpDelete("DeleteReserve/{Id}")]

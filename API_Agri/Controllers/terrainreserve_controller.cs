@@ -81,6 +81,38 @@ namespace API_Agri.Controllers
             return HttpStatusCode.Created;
         }
 
+        [HttpPost("InsertTerrainReserveByIds")]
+        public async Task<HttpStatusCode> InsertTerrainReserveByIds(int terrainId, int reserveId)
+        {
+            var entity = new TerrainReserve()
+            {
+                TerrainId = terrainId,
+                ReserveId = reserveId
+            };
+
+            AgriContext.TerrainsReserves.Add(entity);
+            await AgriContext.SaveChangesAsync();
+
+            return HttpStatusCode.Created;
+        }
+
+        /*
+        [HttpPost("InsertTerrainReserveByTerrainAndReserve")]
+        public async Task<HttpStatusCode> InsertTerrainReserveByTerrainAndReserve(Terrain terrain, Reserve reserve)
+        {
+            var entity = new TerrainReserve()
+            {
+                TerrainId = terrain.TerrainId,
+                ReserveId = reserve.ReserveId
+            };
+
+            AgriContext.TerrainsReserves.Add(entity);
+            await AgriContext.SaveChangesAsync();
+
+            return HttpStatusCode.Created;
+        }
+        */
+
         /*
         [HttpPut("UpdateTerrainReserve")]
         public async Task<HttpStatusCode> UpdateTerrainReserve(TerrainReserve TerrainReserve)
