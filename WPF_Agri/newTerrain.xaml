@@ -9,9 +9,6 @@
       Title="newTerrain">
 
     <Grid Height="450" VerticalAlignment="Bottom">
-        <Button x:Name="newTerrain_Back" Margin="744,0,0,0" Height="37" VerticalAlignment="Top" 
-                Click="newTerrain_Back_Click" FontSize="15" FontWeight="SemiBold">Retour
-        </Button>
         <Label Margin="0,0,0,400" Content="Nouveau Terrain" d:Background="Gray" FontSize="20" FontWeight="SemiBold" 
                VerticalAlignment="Center" HorizontalAlignment="Center"/>
 

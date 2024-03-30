@@ -1,0 +1,40 @@
+﻿<Page x:Class="WPF_Agri.detailMeteo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF_Agri"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="detailMeteo">
+
+    <Grid>
+        <Label x:Name="Label_j0" d:Content="j0" Grid.RowSpan="2"/>
+        <Label x:Name="Label_meteo_j0" Grid.RowSpan="2"/>
+        <Label x:Name="Label_kc_j0" Grid.RowSpan="2"/>
+
+        <Label x:Name="Label_j1" d:Content="j1" Grid.RowSpan="2"/>
+        <Label x:Name="Label_meteo_j1" Grid.RowSpan="2"/>
+        <Label x:Name="Label_kc_j1" Grid.RowSpan="2"/>
+
+        <Label x:Name="Label_j2" d:Content="j2" Grid.RowSpan="2"/>
+        <Label x:Name="Label_meteo_j2" Grid.RowSpan="2"/>
+        <Label x:Name="Label_kc_j2" Grid.RowSpan="2"/>
+
+        <Label x:Name="Label_j3" d:Content="j3" Grid.RowSpan="2"/>
+        <Label x:Name="Label_meteo_j3" Grid.RowSpan="2"/>
+        <Label x:Name="Label_kc_j3" Margin="195,0,0,0"/>
+
+        <Label x:Name="Label_j4" d:Content="j4" Margin="128,0,0,0"/>
+        <Label x:Name="Label_meteo_j4" Margin="128,0,0,0"/>
+        <Label x:Name="Label_kc_j4" Margin="128,0,0,0"/>
+
+        <Label x:Name="Label_j5" d:Content="j5" Margin="128,0,0,0"/>
+        <Label x:Name="Label_meteo_j5" Margin="128,0,0,0"/>
+        <Label x:Name="Label_kc_j5" Margin="128,0,0,0"/>
+
+        <Label x:Name="Label_j6" d:Content="j6" Margin="128,0,0,0"/>
+        <Label x:Name="Label_meteo_j6" Margin="128,0,0,0"/>
+        <Label x:Name="Label_kc_j6" Margin="128,0,0,0"/>
+    </Grid>
+</Page>

@@ -21,3 +21,5 @@ C:\Users\QPAUL\OneDrive\Bureau\BTS SIO\C#\C# 2eme année\Eco_Agri2\WPF_Agri\obj\
 C:\Users\QPAUL\OneDrive\Bureau\BTS SIO\C#\C# 2eme année\Eco_Agri2\WPF_Agri\obj\Debug\newTerrain.g.cs
 C:\Users\QPAUL\OneDrive\Bureau\BTS SIO\C#\C# 2eme année\Eco_Agri2\WPF_Agri\obj\Debug\DefaultPage.baml
 C:\Users\QPAUL\OneDrive\Bureau\BTS SIO\C#\C# 2eme année\Eco_Agri2\WPF_Agri\obj\Debug\newTerrain.baml
+C:\Users\QPAUL\OneDrive\Bureau\BTS SIO\C#\C# 2eme année\Eco_Agri2\WPF_Agri\obj\Debug\detailMeteo.g.cs
+C:\Users\QPAUL\OneDrive\Bureau\BTS SIO\C#\C# 2eme année\Eco_Agri2\WPF_Agri\obj\Debug\detailMeteo.baml

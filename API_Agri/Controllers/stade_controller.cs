@@ -151,13 +151,18 @@ namespace API_Agri.Controllers
         public async Task<HttpStatusCode> UpdateStade(Stade Stade)
         {
             var entity = await AgriContext.Stades.FirstOrDefaultAsync(s => s.StadeId == Stade.StadeId);
-            entity.StadeId = Stade.StadeId;
-            entity.StadeDescription = Stade.StadeDescription;
-            entity.StadePlanteId = Stade.StadePlanteId;
-            entity.StadeKc = Stade.StadeKc;
+            if (entity != null)
+            {
+                entity.StadeId = Stade.StadeId;
+                entity.StadeDescription = Stade.StadeDescription;
+                entity.StadePlanteId = Stade.StadePlanteId;
+                entity.StadeKc = Stade.StadeKc;
 
-            await AgriContext.SaveChangesAsync();
-            return HttpStatusCode.OK;
+                await AgriContext.SaveChangesAsync();
+                return HttpStatusCode.OK;
+            }
+
+            return HttpStatusCode.BadRequest;
         }
 
         [HttpDelete("DeleteStade/{Id}")]

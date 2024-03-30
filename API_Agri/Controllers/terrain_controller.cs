@@ -21,7 +21,6 @@ namespace API_Agri.Controllers
         /// Définition du Web Service
         /// </summary>
         /// <remarks>Je manque d'imagination</remarks>
-        /// <param name="id">id du client a retourné</param>   
         /// <response code="200">client sélectionné</response>
         /// <response code="404">client introuvable pour l'id spécifié</response>
         /// <response code="500">Oops! le service est indisponible pour le moment</response>
@@ -173,7 +172,7 @@ namespace API_Agri.Controllers
         }
 
         [HttpGet("GetAutonomieByData")]
-        public async Task<ActionResult<double>> GetAutonomieByData(double kc, double surface, double volume)
+        public double GetAutonomieByData(double kc, double surface, double volume)
         {
             return volume / (kc * surface);
         }
@@ -223,6 +222,7 @@ namespace API_Agri.Controllers
                     reserves.AddRange(await AgriContext.Reserves.Select(
                         s => new Reserve
                         {
+                            ReserveId= s.ReserveId,
                             ReserveActuel = s.ReserveActuel
                         })
                         .Where(s => s.ReserveId == terrainReserve.ReserveId).ToListAsync());
@@ -266,14 +266,19 @@ namespace API_Agri.Controllers
         public async Task<HttpStatusCode> UpdateTerrain(Terrain Terrain)
         {
             var entity = await AgriContext.Terrains.FirstOrDefaultAsync(s => s.TerrainId == Terrain.TerrainId);
-            entity.TerrainId = Terrain.TerrainId;
-            entity.TerrainInsee = Terrain.TerrainInsee;
-            entity.TerrainNom = Terrain.TerrainNom;
-            entity.TerrainSurface = Terrain.TerrainSurface;
-            entity.TerrainPlanteId = Terrain.TerrainPlanteId;
+            if (entity != null)
+            {
+                entity.TerrainId = Terrain.TerrainId;
+                entity.TerrainInsee = Terrain.TerrainInsee;
+                entity.TerrainNom = Terrain.TerrainNom;
+                entity.TerrainSurface = Terrain.TerrainSurface;
+                entity.TerrainPlanteId = Terrain.TerrainPlanteId;
 
-            await AgriContext.SaveChangesAsync();
-            return HttpStatusCode.OK;
+                await AgriContext.SaveChangesAsync();
+                return HttpStatusCode.OK;
+            }
+
+            return HttpStatusCode.BadRequest;
         }
 
         [HttpDelete("DeleteTerrain/{Id}")]

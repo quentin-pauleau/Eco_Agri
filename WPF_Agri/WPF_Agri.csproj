@@ -61,12 +61,20 @@
     <Compile Include="DefaultPage.xaml.cs">
       <DependentUpon>DefaultPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="detailMeteo.xaml.cs">
+      <DependentUpon>detailMeteo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Meteo.cs" />
     <Compile Include="newTerrain.xaml.cs">
       <DependentUpon>newTerrain.xaml</DependentUpon>
     </Compile>
     <Compile Include="Terrain.cs" />
     <Compile Include="TerrainReserve.cs" />
     <Page Include="DefaultPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="detailMeteo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

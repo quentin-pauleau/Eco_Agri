@@ -25,18 +25,13 @@ namespace WPF_Agri
             InitializeComponent();
         }
 
-        private void newTerrain_Back_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private async void newTerrain_Confirm_Click(object sender, RoutedEventArgs e)
         {
             Terrain terrain= new Terrain
             {
                 TerrainInsee = newTerrain_Insee.Text,
                 TerrainNom = newTerrain_Name.Text,
-                TerrainSurface = int.Parse(newTerrain_Surface.Text),
+                TerrainSurface = int.Parse(newTerrain_Surface.Text)
             };
 
             if (!await Api_request.CreateTerrain(terrain))

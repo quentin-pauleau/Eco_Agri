@@ -110,14 +110,21 @@ public partial class AgriContext : DbContext
         
         modelBuilder.Entity<TerrainReserve>(entity =>
         {
+            entity.HasKey(e => e.TerrainReserveId).HasName("PRIMARY");
+            entity.ToTable("terrain_reserve");
+            /*
             entity
                 .HasNoKey()
                 .ToTable("terrain_reserve");
+            */
 
+            entity.HasIndex(e => e.TerrainReserveId, "terrain_reserve_id");
             entity.HasIndex(e => e.TerrainId, "terrain_id_idx");
 
             entity.HasIndex(e => e.ReserveId, "reserve_id_idx");
 
+            entity.Property(e => e.TerrainReserveId)
+                .HasColumnName("terrain_reserve_id");
             entity.Property(e => e.TerrainId)
                 .HasColumnName("terrain_id");
             entity.Property(e => e.ReserveId)

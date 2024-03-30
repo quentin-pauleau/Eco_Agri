@@ -6,7 +6,7 @@ using MySql.EntityFrameworkCore.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEntityFrameworkMySQL().AddDbContext<AgriContext>(options => {
-    options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")!);
 });
 
 // Add services to the container.
